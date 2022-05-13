@@ -12,12 +12,12 @@ with st.echo(code_location='below'):
 
     @st.cache
     def get_teams():
-        return pd.read_csv(r"C:\Users\vital\Downloads\archive\team_info.csv")[["team_id", "shortName", "teamName", "abbreviation"]].sort_values("team_id")
+        return pd.read_csv(r"team_info.csv")[["team_id", "shortName", "teamName", "abbreviation"]].sort_values("team_id")
     teamstat = get_teams()
 
     @st.cache(allow_output_mutation=True)
     def get_games():
-        gamestat = pd.read_csv(r"C:\Users\vital\Downloads\archive\game.csv")[["season", "type", "away_team_id", "home_team_id", "away_goals", "home_goals", "outcome", "venue"]]
+        gamestat = pd.read_csv(r"game.csv")[["season", "type", "away_team_id", "home_team_id", "away_goals", "home_goals", "outcome", "venue"]]
         gamestat["away_team"] = gamestat["away_team_id"].apply(lambda x: team_abr(x))
         gamestat["home_team"] = gamestat["home_team_id"].apply(lambda x: team_abr(x))
         return gamestat[["season", "type", "venue", "home_team", "away_team", "home_goals", "away_goals", "outcome"]]
