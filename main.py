@@ -1,15 +1,11 @@
-#let's import everything we need
 import streamlit as st
 import pandas as pd
-import numpy as np
 
 import matplotlib.pyplot as plt
 import seaborn as sns
-from plotnine import ggplot, aes, geom_point, geom_smooth, geom_jitter
 import plotly_express as px
 
 with st.echo(code_location='below'):
-    #First, let's make some functions for downloading data
     def team_abr(team_id):
         try:
             return teamstat[teamstat["team_id"] == team_id]["abbreviation"].values[0]
